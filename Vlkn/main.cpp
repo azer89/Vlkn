@@ -24,7 +24,8 @@ int main()
     glm::vec4 vec;
     auto test = matrix * vec;
 
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(window)) 
+    {
         glfwPollEvents();
     }
 
