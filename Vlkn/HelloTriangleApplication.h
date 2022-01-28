@@ -8,8 +8,8 @@
 #include <stdexcept>
 #include <cstdlib>
 
-//const uint32_t WIDTH = 800;
-//const uint32_t HEIGHT = 600;
+const uint32_t WIDTH = 800;
+const uint32_t HEIGHT = 600;
 
 class HelloTriangleApplication
 {
@@ -22,6 +22,8 @@ public:
     }
 
 private:
+    GLFWwindow* window;
+
     void initVulkan() 
     {
     }
