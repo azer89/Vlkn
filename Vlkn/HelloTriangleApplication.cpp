@@ -3,6 +3,7 @@
 #include <cstdlib>
 
 #include "HelloTriangleApplication.h"
+#include "ValidationLayer.h"
 
 void HelloTriangleApplication::run()
 {
