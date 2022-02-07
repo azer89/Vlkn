@@ -29,6 +29,16 @@ private:
     void cleanup();
 
     void createInstance();
+
+    void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
+
+    void setupDebugMessenger();
+
+    std::vector<const char*> getRequiredExtensions();
+
+    bool checkValidationLayerSupport();
+
+    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 };
 
 #endif
