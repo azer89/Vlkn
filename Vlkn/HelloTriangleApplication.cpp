@@ -39,9 +39,7 @@ void HelloTriangleApplication::mainLoop()
 void HelloTriangleApplication::cleanup()
 {
     vkDestroyInstance(instance, nullptr);
-
     glfwDestroyWindow(window);
-
     glfwTerminate();
 }
 
@@ -74,7 +72,6 @@ void HelloTriangleApplication::createInstance()
 
     createInfo.enabledExtensionCount = glfwExtensionCount;
     createInfo.ppEnabledExtensionNames = glfwExtensions;
-
     createInfo.enabledLayerCount = 0;
 
     if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
@@ -98,7 +95,10 @@ void HelloTriangleApplication::populateDebugMessengerCreateInfo(VkDebugUtilsMess
 
 void HelloTriangleApplication::setupDebugMessenger()
 {
-    if (!enableValidationLayers) return;
+    if (!enableValidationLayers)
+    {
+        return;
+    }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
