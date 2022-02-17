@@ -30,6 +30,8 @@ private:
 
     void createInstance();
 
+    void pickPhysicalDevice();
+
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
 
     void setupDebugMessenger();
