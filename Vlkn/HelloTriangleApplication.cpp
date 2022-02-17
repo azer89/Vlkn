@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstdlib>
-#include <optional>
 
 #include "HelloTriangleApplication.h"
 #include "ValidationLayer.h"
