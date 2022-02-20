@@ -6,6 +6,8 @@
 
 #include <vector>
 
+#include "QueueFamilyIndices.h"
+
 class HelloTriangleApplication
 {
 private:
@@ -22,25 +24,19 @@ public:
 
 private:
     void initWindow();
-
     void initVulkan();
-
     void mainLoop();
-
     void cleanup();
-
     void createInstance();
 
     void pickPhysicalDevice();
+    bool isDeviceSuitable(VkPhysicalDevice device);
+    QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
-
     void setupDebugMessenger();
-
     std::vector<const char*> getRequiredExtensions();
-
     bool checkValidationLayerSupport();
-
     static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData);
 };
 
