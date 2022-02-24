@@ -25,6 +25,7 @@ void HelloTriangleApplication::initVulkan()
 {
     createInstance();
     setupDebugMessenger();
+    pickPhysicalDevice();
 }
 
 void HelloTriangleApplication::mainLoop()
@@ -119,13 +120,13 @@ void HelloTriangleApplication::pickPhysicalDevice()
     }
 }
 
-bool isDeviceSuitable(VkPhysicalDevice device) 
+bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
 {
     QueueFamilyIndices indices = findQueueFamilies(device);
     return indices.isComplete();
 }
 
-QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device) 
+QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice device)
 {
     QueueFamilyIndices indices;
 
