@@ -40,7 +40,7 @@ void HelloTriangleApplication::cleanup()
 {
     if (enableValidationLayers) 
     {
-        DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+        //DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
     }
 
     vkDestroyInstance(instance, nullptr);
@@ -236,6 +236,7 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, 
     void* pUserData) 
 {
-    std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+    // Is this an error?
+    std::cerr << "Validation layer: " << pCallbackData->pMessage << "\n\n";
     return VK_FALSE;
 }
