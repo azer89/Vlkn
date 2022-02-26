@@ -40,7 +40,7 @@ void HelloTriangleApplication::cleanup()
 {
     if (enableValidationLayers) 
     {
-        //DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
+        DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
     }
 
     vkDestroyInstance(instance, nullptr);
@@ -52,7 +52,7 @@ void HelloTriangleApplication::createInstance()
 {
     if (enableValidationLayers && !checkValidationLayerSupport())
     {
-        throw std::runtime_error("validation layers requested, but not available!");
+        throw std::runtime_error("Validation layers requested, but not available!");
     }
 
     VkApplicationInfo appInfo{};
