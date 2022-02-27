@@ -38,7 +38,7 @@ void HelloTriangleApplication::mainLoop()
 
 void HelloTriangleApplication::cleanup()
 {
-    if (enableValidationLayers) 
+    if (enableValidationLayers)
     {
         DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
     }
@@ -174,13 +174,17 @@ void HelloTriangleApplication::setupDebugMessenger()
     {
         return;
     }
+    else
+    {
+        std::cout << "Validation layers enabled\n";
+    }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
 
     if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) 
     {
-        throw std::runtime_error("failed to set up debug messenger!");
+        throw std::runtime_error("Failed to set up debug messenger!");
     }
 }
 
@@ -236,7 +240,12 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, 
     void* pUserData) 
 {
-    // Is this an error?
-    std::cerr << "Validation layer: " << pCallbackData->pMessage << "\n\n";
+    if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) 
+    {
+        // Message is important enough to show
+        std::cerr << "Validation layer: " << pCallbackData->pMessage << "\n";
+    }
+
+    
     return VK_FALSE;
 }
