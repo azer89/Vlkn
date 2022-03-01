@@ -88,7 +88,7 @@ void HelloTriangleApplication::createInstance()
 
     if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
     {
-        throw std::runtime_error("failed to create instance!");
+        throw std::runtime_error("Failed to create instance!");
     }
 }
 
@@ -99,7 +99,7 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (deviceCount == 0) 
     {
-        throw std::runtime_error("failed to find GPUs with Vulkan support!");
+        throw std::runtime_error("Failed to find GPUs with Vulkan support!");
     }
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
@@ -116,7 +116,7 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (physicalDevice == VK_NULL_HANDLE) 
     {
-        throw std::runtime_error("failed to find a suitable GPU!");
+        throw std::runtime_error("Failed to find a suitable GPU!");
     }
 }
 
