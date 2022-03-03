@@ -243,7 +243,7 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
     if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT) 
     {
         // Message is important enough to show
-        std::cerr << "Validation layer: " << pCallbackData->pMessage << "\n";
+        std::cerr << "Debug Callback: " << pCallbackData->pMessage << "\n";
     }
 
     
