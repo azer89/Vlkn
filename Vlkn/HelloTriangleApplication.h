@@ -29,10 +29,12 @@ private:
     void cleanup();
     void createInstance();
 
+    // Physical devices
     void pickPhysicalDevice();
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
 
+    // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
     void setupDebugMessenger();
     std::vector<const char*> getRequiredExtensions();

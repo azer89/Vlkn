@@ -245,7 +245,6 @@ VKAPI_ATTR VkBool32 VKAPI_CALL HelloTriangleApplication::debugCallback(
         // Message is important enough to show
         std::cerr << "Debug Callback: " << pCallbackData->pMessage << "\n";
     }
-
     
     return VK_FALSE;
 }
