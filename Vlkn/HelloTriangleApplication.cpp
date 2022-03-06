@@ -101,6 +101,10 @@ void HelloTriangleApplication::pickPhysicalDevice()
     {
         throw std::runtime_error("Failed to find GPUs with Vulkan support!");
     }
+    else
+    {
+        std::cout << "deviceCount = " << deviceCount << '\n';
+    }
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
     vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
