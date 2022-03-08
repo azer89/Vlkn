@@ -12,12 +12,16 @@ class HelloTriangleApplication
 {
 private:
     GLFWwindow* window;
+
     VkInstance instance;
     VkDebugUtilsMessengerEXT debugMessenger;
+    VkSurfaceKHR surface;
 
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
     VkDevice device;
+
     VkQueue graphicsQueue;
+    VkQueue presentQueue;
 
     const uint32_t WIDTH = 800;
     const uint32_t HEIGHT = 600;
@@ -37,6 +41,9 @@ private:
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     void createLogicalDevice();
+
+    // Window surface
+    void createSurface();
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
