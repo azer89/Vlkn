@@ -102,7 +102,11 @@ void HelloTriangleApplication::createSurface()
 {
     if (glfwCreateWindowSurface(instance, window, nullptr, &surface) != VK_SUCCESS) 
     {
-        throw std::runtime_error("failed to create window surface!");
+        throw std::runtime_error("Failed to create window surface!");
+    }
+    else
+    {
+        std::cout << "Success creating window surface!\n";
     }
 }
 
@@ -224,7 +228,7 @@ void HelloTriangleApplication::createLogicalDevice()
     }
     else
     {
-        std::cout << "Successful creating logical device!\n";
+        std::cout << "Success creating logical device!\n";
     }
 
     vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
