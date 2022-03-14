@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "QueueFamilyIndices.h"
+#include "SwapChainSupportDetails.h"
 
 class HelloTriangleApplication
 {
@@ -50,6 +51,14 @@ private:
 
     // Window surface
     void createSurface();
+
+    // Swap chain
+    void createSwapChain();
+    VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+    VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+    SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
