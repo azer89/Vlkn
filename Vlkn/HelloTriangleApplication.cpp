@@ -13,16 +13,22 @@ const std::vector<const char*> validationLayers =
     "VK_LAYER_KHRONOS_validation"
 };
 
-/*const std::vector<const char*> deviceExtensions =
+const std::vector<const char*> deviceExtensions =
 {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME
-};*/
+};
 
 //#ifdef NDEBUG
 //const bool enableValidationLayers = false;
 //#else
 const bool enableValidationLayers = true;
 //#endif
+
+// Swap chain
+VkSwapchainKHR swapChain;
+std::vector<VkImage> swapChainImages;
+VkFormat swapChainImageFormat;
+VkExtent2D swapChainExtent;
 
 void HelloTriangleApplication::run()
 {
@@ -47,7 +53,7 @@ void HelloTriangleApplication::initVulkan()
     createSurface();
     pickPhysicalDevice();
     createLogicalDevice();
-    //createSwapChain();
+    createSwapChain();
 }
 
 void HelloTriangleApplication::mainLoop()
@@ -60,7 +66,7 @@ void HelloTriangleApplication::mainLoop()
 
 void HelloTriangleApplication::cleanup()
 {
-    //vkDestroySwapchainKHR(device, swapChain, nullptr);
+    vkDestroySwapchainKHR(device, swapChain, nullptr);
     vkDestroyDevice(device, nullptr);
 
     if (enableValidationLayers)
@@ -163,7 +169,7 @@ void HelloTriangleApplication::pickPhysicalDevice()
     }
 }
 
-/*void HelloTriangleApplication::createSwapChain()
+void HelloTriangleApplication::createSwapChain()
 {
     SwapChainSupportDetails swapChainSupport = querySwapChainSupport(physicalDevice);
     VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
@@ -207,7 +213,11 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (vkCreateSwapchainKHR(device, &createInfo, nullptr, &swapChain) != VK_SUCCESS) 
     {
-        throw std::runtime_error("failed to create swap chain!");
+        throw std::runtime_error("Failed to create swap chain!");
+    }
+    else
+    {
+        std::cout << "Success creating swap chain!\n";
     }
 
     vkGetSwapchainImagesKHR(device, swapChain, &imageCount, nullptr);
@@ -215,9 +225,9 @@ void HelloTriangleApplication::pickPhysicalDevice()
     vkGetSwapchainImagesKHR(device, swapChain, &imageCount, swapChainImages.data());
     swapChainImageFormat = surfaceFormat.format;
     swapChainExtent = extent;
-}*/
+}
 
-/*VkSurfaceFormatKHR HelloTriangleApplication::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats)
+VkSurfaceFormatKHR HelloTriangleApplication::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats)
 {
     for (const auto& availableFormat : availableFormats) 
     {
@@ -227,9 +237,9 @@ void HelloTriangleApplication::pickPhysicalDevice()
         }
     }
     return availableFormats[0];
-}*/
+}
 
-/*VkPresentModeKHR HelloTriangleApplication::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
+VkPresentModeKHR HelloTriangleApplication::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
 {
     for (const auto& availablePresentMode : availablePresentModes) 
     {
@@ -239,9 +249,9 @@ void HelloTriangleApplication::pickPhysicalDevice()
         }
     }
     return VK_PRESENT_MODE_FIFO_KHR;
-}*/
+}
 
-/*VkExtent2D HelloTriangleApplication::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities)
+VkExtent2D HelloTriangleApplication::chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities)
 {
     if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) 
     {
@@ -260,9 +270,9 @@ void HelloTriangleApplication::pickPhysicalDevice()
         actualExtent.height = std::clamp(actualExtent.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
         return actualExtent;
     }
-}*/
+}
 
-/*SwapChainSupportDetails HelloTriangleApplication::querySwapChainSupport(VkPhysicalDevice device)
+SwapChainSupportDetails HelloTriangleApplication::querySwapChainSupport(VkPhysicalDevice device)
 {
     SwapChainSupportDetails details;
     vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
@@ -284,9 +294,9 @@ void HelloTriangleApplication::pickPhysicalDevice()
         vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
     }
     return details;
-}*/
+}
 
-/*bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice device)
+bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice device)
 {
     uint32_t extensionCount;
     vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
@@ -298,21 +308,21 @@ void HelloTriangleApplication::pickPhysicalDevice()
         requiredExtensions.erase(extension.extensionName);
     }
     return requiredExtensions.empty();
-}*/
+}
 
 bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
 {
     QueueFamilyIndices indices = findQueueFamilies(device);
     
-    return indices.isComplete();
-    /*bool extensionsSupported = checkDeviceExtensionSupport(device);
+    //return indices.isComplete();
+    bool extensionsSupported = checkDeviceExtensionSupport(device);
     bool swapChainAdequate = false;
     if (extensionsSupported) 
     {
         SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
         swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
     }
-    return indices.isComplete() && extensionsSupported && swapChainAdequate;*/
+    return indices.isComplete() && extensionsSupported && swapChainAdequate;
 }
 
 QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice device)
@@ -378,9 +388,9 @@ void HelloTriangleApplication::createLogicalDevice()
     createInfo.pEnabledFeatures = &deviceFeatures;
     
     //
-    createInfo.enabledExtensionCount = 0;
-    //createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
-    //createInfo.ppEnabledExtensionNames = deviceExtensions.data();
+    //createInfo.enabledExtensionCount = 0;
+    createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
+    createInfo.ppEnabledExtensionNames = deviceExtensions.data();
 
     if (enableValidationLayers) 
     {

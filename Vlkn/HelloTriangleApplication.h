@@ -12,6 +12,7 @@
 class HelloTriangleApplication
 {
 private:
+
     GLFWwindow* window;
 
     VkInstance instance;
@@ -53,12 +54,12 @@ private:
     void createSurface();
 
     // Swap chain
-    /*void createSwapChain();
+    void createSwapChain();
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
     SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-    bool checkDeviceExtensionSupport(VkPhysicalDevice device);*/
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
