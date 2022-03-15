@@ -25,10 +25,10 @@ private:
     VkQueue presentQueue;
 
     // Swap chain
-    VkSwapchainKHR swapChain;
-    std::vector<VkImage> swapChainImages;
-    VkFormat swapChainImageFormat;
-    VkExtent2D swapChainExtent;
+    //VkSwapchainKHR swapChain;
+    //std::vector<VkImage> swapChainImages;
+    //VkFormat swapChainImageFormat;
+    //VkExtent2D swapChainExtent;
 
     const uint32_t WIDTH = 800;
     const uint32_t HEIGHT = 600;
@@ -53,12 +53,12 @@ private:
     void createSurface();
 
     // Swap chain
-    void createSwapChain();
+    /*void createSwapChain();
     VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
     VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
     VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
     SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-    bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+    bool checkDeviceExtensionSupport(VkPhysicalDevice device);*/
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
