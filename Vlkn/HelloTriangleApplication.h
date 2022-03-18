@@ -77,6 +77,9 @@ private:
     SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
     bool checkDeviceExtensionSupport(VkPhysicalDevice device);
 
+    // Image views
+    void createImageViews();
+
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
     void setupDebugMessenger();
