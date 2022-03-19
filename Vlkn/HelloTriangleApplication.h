@@ -80,6 +80,9 @@ private:
     // Image views
     void createImageViews();
 
+    // Pipeline
+    void createGraphicsPipeline();
+
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
     void setupDebugMessenger();

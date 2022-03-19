@@ -6,7 +6,9 @@
 #include <cstdint>
 #include <limits>
 
+
 #include "HelloTriangleApplication.h"
+#include "FileIO.h"
 
 void HelloTriangleApplication::run()
 {
@@ -33,6 +35,7 @@ void HelloTriangleApplication::initVulkan()
     createLogicalDevice();
     createSwapChain();
     createImageViews();
+    createGraphicsPipeline();
 }
 
 void HelloTriangleApplication::mainLoop()
@@ -322,6 +325,12 @@ void HelloTriangleApplication::createImageViews()
             std::cout << "Success creating an image view\n";
         }
     }
+}
+
+void HelloTriangleApplication::createGraphicsPipeline()
+{
+    auto vertShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/shader.vert");
+    auto fragShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/shader.vert");
 }
 
 bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)

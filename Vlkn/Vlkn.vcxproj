@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileIO.h" />
     <ClInclude Include="HelloTriangleApplication.h" />
     <ClInclude Include="QueueFamilyIndices.h" />
     <ClInclude Include="SwapChainSupportDetails.h" />
