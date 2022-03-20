@@ -329,6 +329,7 @@ void HelloTriangleApplication::createImageViews()
 
 void HelloTriangleApplication::createGraphicsPipeline()
 {
+    // TODO: change to relative paths
     auto vertShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/shader.vert");
     auto fragShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/shader.vert");
 }
