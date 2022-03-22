@@ -82,6 +82,7 @@ private:
 
     // Pipeline
     void createGraphicsPipeline();
+    VkShaderModule createShaderModule(const std::vector<char>& code);
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
