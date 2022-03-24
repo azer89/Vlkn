@@ -8,16 +8,14 @@ int main()
 
     try 
     {
-        std::cout << "Try run\n";
         app.run();
     }
     catch (const std::exception& e) 
     {
-        std::cout << "Catch error\n";
+        std::cout << "Catch error on main(): \n";
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;
     }
 
-    std::cout << "Success\n";
     return EXIT_SUCCESS;
 }

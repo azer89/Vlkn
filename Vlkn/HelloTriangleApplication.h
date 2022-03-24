@@ -59,7 +59,7 @@ private:
     void initWindow();
     void initVulkan();
     void mainLoop();
-    void cleanup();
+    void cleanup(); // after the window is closed 
     void createInstance();
 
     // Physical devices

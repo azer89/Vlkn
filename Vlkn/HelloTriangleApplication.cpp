@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdexcept>
-#include <cstdlib>
+#include <cstdlib> // EXIT_SUCCESS and EXIT_FAILURE macros
 #include <set>
 #include <algorithm>
 #include <cstdint>
@@ -73,7 +73,11 @@ void HelloTriangleApplication::createInstance()
 {
     if (enableValidationLayers && !checkValidationLayerSupport())
     {
-        throw std::runtime_error("Validation layers requested, but not available!");
+        throw std::runtime_error("[ERROR] Validation layers requested, but not available.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Validation layers are enabled.\n";
     }
 
     VkApplicationInfo appInfo{};
@@ -109,7 +113,11 @@ void HelloTriangleApplication::createInstance()
 
     if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
     {
-        throw std::runtime_error("Failed to create instance!");
+        throw std::runtime_error("[ERROR] Failed to create Vulkan instance.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Vulkan instance is created.\n";
     }
 }
 
@@ -117,11 +125,11 @@ void HelloTriangleApplication::createSurface()
 {
     if (glfwCreateWindowSurface(instance, window, nullptr, &surface) != VK_SUCCESS) 
     {
-        throw std::runtime_error("Failed to create window surface!");
+        throw std::runtime_error("[ERROR] Failed to create window surface.");
     }
     else
     {
-        std::cout << "Success creating window surface!\n";
+        std::cout << "[SUCCESS] Window surface created.\n";
     }
 }
 
@@ -133,11 +141,11 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (deviceCount == 0) 
     {
-        throw std::runtime_error("Failed to find GPUs with Vulkan support!");
+        throw std::runtime_error("[ERROR] Failed to find a GPU with Vulkan support.");
     }
     else
     {
-        std::cout << "deviceCount = " << deviceCount << '\n';
+        std::cout << "[SUCCESS] GPUs found, deviceCount = " << deviceCount << '\n';
     }
 
     std::vector<VkPhysicalDevice> devices(deviceCount);
@@ -155,6 +163,10 @@ void HelloTriangleApplication::pickPhysicalDevice()
     if (physicalDevice == VK_NULL_HANDLE) 
     {
         throw std::runtime_error("Failed to find a suitable GPU!");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Suitable GPU found.\n";
     }
 }
 
@@ -202,11 +214,11 @@ void HelloTriangleApplication::createSwapChain()
 
     if (vkCreateSwapchainKHR(device, &createInfo, nullptr, &swapChain) != VK_SUCCESS) 
     {
-        throw std::runtime_error("Failed to create swap chain!");
+        throw std::runtime_error("[ERROR] Failed to create swap chain.");
     }
     else
     {
-        std::cout << "Success creating swap chain!\n";
+        std::cout << "[SUCCESS] Swap chain created.\n";
     }
 
     vkGetSwapchainImagesKHR(device, swapChain, &imageCount, nullptr);
@@ -320,11 +332,11 @@ void HelloTriangleApplication::createImageViews()
         createInfo.subresourceRange.layerCount = 1;
         if (vkCreateImageView(device, &createInfo, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) 
         {
-            throw std::runtime_error("Failed to create an image view!");
+            throw std::runtime_error("[ERROR] Failed to create an image view.");
         }
         else
         {
-            std::cout << "Success creating image view\n";
+            std::cout << "[SUCCESS] Image view created.\n";
         }
     }
 }
@@ -408,11 +420,11 @@ void HelloTriangleApplication::createGraphicsPipeline()
     pipelineLayoutInfo.pushConstantRangeCount = 0;
     if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) 
     {
-        throw std::runtime_error("failed to create pipeline layout!");
+        throw std::runtime_error("[ERROR] Failed to create pipeline layout.");
     }
     else
     {
-        std::cout << "Success creating pipeline layout\n";
+        std::cout << "[SUCCESS] Pipeline layout created.\n";
     }
 
     // Destroy?
@@ -429,11 +441,11 @@ VkShaderModule HelloTriangleApplication::createShaderModule(const std::vector<ch
     VkShaderModule shaderModule;
     if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) 
     {
-        throw std::runtime_error("Failed to create shader module!");
+        throw std::runtime_error("[ERROR] Failed to create shader module.");
     }
     else
     {
-        std::cout << "Success creating shader module\n";
+        std::cout << "[SUCCESS] shader module created.\n";
     }
     return shaderModule;
 }
@@ -532,11 +544,11 @@ void HelloTriangleApplication::createLogicalDevice()
 
     if (vkCreateDevice(physicalDevice, &createInfo, nullptr, &device) != VK_SUCCESS) 
     {
-        throw std::runtime_error("Failed to create logical device!");
+        throw std::runtime_error("[ERROR] Failed to create logical device.");
     }
     else
     {
-        std::cout << "Success creating logical device!\n";
+        std::cout << "[SUCCESS] Logical device created.\n";
     }
 
     vkGetDeviceQueue(device, indices.graphicsFamily.value(), 0, &graphicsQueue);
@@ -564,7 +576,7 @@ void HelloTriangleApplication::setupDebugMessenger()
     }
     else
     {
-        std::cout << "Validation layers enabled\n";
+        std::cout << "[SUCCESS] Validation layers enabled\n";
     }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
@@ -572,7 +584,11 @@ void HelloTriangleApplication::setupDebugMessenger()
 
     if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) 
     {
-        throw std::runtime_error("Failed to set up debug messenger!");
+        throw std::runtime_error("[ERROR] Failed to set up debug messenger.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Debug messenger is set up\n";
     }
 }
 
