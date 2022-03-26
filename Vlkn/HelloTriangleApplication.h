@@ -63,7 +63,8 @@ private:
     void createInstance();
 
     // Physical devices
-    void pickPhysicalDevice();
+    // Select a graphics card
+    void pickPhysicalDevice(); 
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     void createLogicalDevice();
