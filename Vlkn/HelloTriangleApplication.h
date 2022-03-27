@@ -65,6 +65,7 @@ private:
     // Physical devices
     // Select a graphics card
     void pickPhysicalDevice(); 
+    //  If any of the physical devices meet the requirements
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
     void createLogicalDevice();
