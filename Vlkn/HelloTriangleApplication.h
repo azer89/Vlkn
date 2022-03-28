@@ -37,8 +37,8 @@ private:
     VkDebugUtilsMessengerEXT debugMessenger;
     VkSurfaceKHR surface;
 
-    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-    VkDevice device;
+    VkPhysicalDevice physicalDevice = VK_NULL_HANDLE; // Store the selected graphics card
+    VkDevice device; // Logical device
 
     VkQueue graphicsQueue;
     VkQueue presentQueue;

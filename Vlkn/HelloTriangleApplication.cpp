@@ -453,8 +453,7 @@ VkShaderModule HelloTriangleApplication::createShaderModule(const std::vector<ch
 bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
 {
     QueueFamilyIndices indices = findQueueFamilies(device);
-    
-    //return indices.isComplete();
+
     bool extensionsSupported = checkDeviceExtensionSupport(device);
     bool swapChainAdequate = false;
     if (extensionsSupported) 
@@ -465,6 +464,10 @@ bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
     return indices.isComplete() && extensionsSupported && swapChainAdequate;
 }
 
+/*
+Almost every operation in Vulkan, anything from drawing to uploading textures, 
+requires commands to be submitted to a queue.
+*/
 QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice device)
 {
     QueueFamilyIndices indices;
@@ -475,7 +478,7 @@ QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice 
     std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
     vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
-    int i = 0;
+    uint32_t i = 0;
     for (const auto& queueFamily : queueFamilies) 
     {
         if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) 
