@@ -50,8 +50,10 @@ private:
     VkExtent2D swapChainExtent;
     std::vector<VkImageView> swapChainImageViews;
 
+    // Pipeline
     VkRenderPass renderPass;
     VkPipelineLayout pipelineLayout;
+    VkPipeline graphicsPipeline;
 
 public:
     void run();
@@ -88,6 +90,7 @@ private:
     // Pipeline
     void createGraphicsPipeline();
     VkShaderModule createShaderModule(const std::vector<char>& code);
+    void createRenderPass();
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
