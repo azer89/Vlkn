@@ -27,6 +27,7 @@ const bool enableValidationLayers = true;
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
+const int MAX_FRAMES_IN_FLIGHT = 2;
 
 class HelloTriangleApplication
 {
@@ -59,6 +60,10 @@ private:
     // Command
     VkCommandPool commandPool;
     VkCommandBuffer commandBuffer;
+
+    VkSemaphore imageAvailableSemaphores;
+    VkSemaphore renderFinishedSemaphores;
+    VkFence inFlightFence;
 
 public:
     void run();
@@ -102,6 +107,9 @@ private:
     void createCommandPool();
     void createCommandBuffer();
     void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
+
+    void createSyncObjects();
+    void drawFrame();
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
