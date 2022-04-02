@@ -56,6 +56,10 @@ private:
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
 
+    // Command
+    VkCommandPool commandPool;
+    VkCommandBuffer commandBuffer;
+
 public:
     void run();
 
@@ -93,6 +97,11 @@ private:
     VkShaderModule createShaderModule(const std::vector<char>& code);
     void createRenderPass();
     void createFramebuffers();
+
+    // Command
+    void createCommandPool();
+    void createCommandBuffer();
+    void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);

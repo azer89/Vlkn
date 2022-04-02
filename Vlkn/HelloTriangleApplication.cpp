@@ -521,6 +521,75 @@ VkShaderModule HelloTriangleApplication::createShaderModule(const std::vector<ch
     return shaderModule;
 }
 
+void HelloTriangleApplication::createCommandPool()
+{
+    QueueFamilyIndices queueFamilyIndices = findQueueFamilies(physicalDevice);
+    VkCommandPoolCreateInfo poolInfo{};
+    poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+    poolInfo.queueFamilyIndex = queueFamilyIndices.graphicsFamily.value();
+    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) 
+    {
+        throw std::runtime_error("[ERROR] Failed to create command pool.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Command pool created.\n";
+    }
+}
+
+void HelloTriangleApplication::createCommandBuffer()
+{
+    VkCommandBufferAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    allocInfo.commandPool = commandPool;
+    allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    allocInfo.commandBufferCount = 1;
+    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) 
+    {
+        throw std::runtime_error("[ERROR] Failed to allocate command buffers.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Command buffer created.\n";
+    }
+}
+
+void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex)
+{
+    VkCommandBufferBeginInfo beginInfo{};
+    beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    if (vkBeginCommandBuffer(commandBuffer, &beginInfo) != VK_SUCCESS) 
+    {
+        throw std::runtime_error("[ERROR] Failed to begin recording command buffer.");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Recording command buffer.\n";
+    }
+    VkRenderPassBeginInfo renderPassInfo{};
+    renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+    renderPassInfo.renderPass = renderPass;
+    renderPassInfo.framebuffer = swapChainFramebuffers[imageIndex];
+    renderPassInfo.renderArea.offset = { 0, 0 };
+    renderPassInfo.renderArea.extent = swapChainExtent;
+    VkClearValue clearColor = { {{0.0f, 0.0f, 0.0f, 1.0f}} };
+    renderPassInfo.clearValueCount = 1;
+    renderPassInfo.pClearValues = &clearColor;
+    vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+    vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+    vkCmdEndRenderPass(commandBuffer);
+    if (vkEndCommandBuffer(commandBuffer) != VK_SUCCESS) 
+    {
+        throw std::runtime_error("[ERROR] Failed to record command buffer!");
+    }
+    else
+    {
+        std::cout << "[SUCCESS] Command buffer recorded.\n";
+    }
+}
+
 void HelloTriangleApplication::createRenderPass()
 {
     VkAttachmentDescription colorAttachment{};
@@ -682,7 +751,7 @@ void HelloTriangleApplication::setupDebugMessenger()
     }
     else
     {
-        std::cout << "[SUCCESS] Validation layers enabled\n";
+        std::cout << "[SUCCESS] Validation layers is enabled.\n";
     }
 
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
@@ -694,7 +763,7 @@ void HelloTriangleApplication::setupDebugMessenger()
     }
     else
     {
-        std::cout << "[SUCCESS] Debug messenger is set up\n";
+        std::cout << "[SUCCESS] Debug messenger is set up.\n";
     }
 }
 
