@@ -62,8 +62,10 @@ private:
     VkCommandPool commandPool;
     VkCommandBuffer commandBuffer;
 
+    // Are used to add order between queue operations
     VkSemaphore imageAvailableSemaphores;
     VkSemaphore renderFinishedSemaphores;
+    // For ordering the execution on the CPU/host
     VkFence inFlightFence;
 
 public:
