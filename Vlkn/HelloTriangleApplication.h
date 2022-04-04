@@ -27,6 +27,7 @@ const bool enableValidationLayers = true;
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
+
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
 class HelloTriangleApplication
@@ -72,16 +73,16 @@ private:
     void initWindow();
     void initVulkan();
     void mainLoop();
-    void cleanup(); // after the window is closed 
+    void cleanup(); // After the window is closed 
     void createInstance();
 
     // Physical devices
     // Select a graphics card
     void pickPhysicalDevice(); 
-    //  If any of the physical devices meet the requirements
+    void createLogicalDevice();
+    // If any of the physical devices meet the requirements
     bool isDeviceSuitable(VkPhysicalDevice device);
     QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
-    void createLogicalDevice();
 
     // Window surface
     void createSurface();
