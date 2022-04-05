@@ -60,13 +60,14 @@ private:
 
     // Command
     VkCommandPool commandPool;
-    VkCommandBuffer commandBuffer;
+    std::vector<VkCommandBuffer> commandBuffers;
 
     // Are used to add order between queue operations
-    VkSemaphore imageAvailableSemaphores;
-    VkSemaphore renderFinishedSemaphores;
+    std::vector<VkSemaphore> imageAvailableSemaphores;
+    std::vector<VkSemaphore> renderFinishedSemaphores;
     // For ordering the execution on the CPU/host
-    VkFence inFlightFence;
+    std::vector<VkFence> inFlightFences;
+    uint32_t currentFrame = 0;
 
 public:
     void run();
@@ -108,7 +109,7 @@ private:
 
     // Command
     void createCommandPool();
-    void createCommandBuffer();
+    void createCommandBuffers();
     void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 
     void createSyncObjects();
