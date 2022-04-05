@@ -153,10 +153,10 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (deviceCount == 0) 
     {
-        throw std::runtime_error("[ERROR] Failed to find a GPU with Vulkan support.");
+        throw std::runtime_error("[ERROR] Failed to find any GPU.");
     }
 
-    std::vector<VkPhysicalDevice> devices(deviceCount);
+    std::vector<VkPhysicalDevice> devices(deviceCount); // All devices
     vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
     for (const auto& device : devices) 
@@ -170,7 +170,7 @@ void HelloTriangleApplication::pickPhysicalDevice()
 
     if (physicalDevice == VK_NULL_HANDLE) 
     {
-        throw std::runtime_error("Failed to find a suitable GPU!");
+        throw std::runtime_error("Failed to find a suitable GPU.");
     }
 }
 
@@ -768,7 +768,7 @@ void HelloTriangleApplication::populateDebugMessengerCreateInfo(VkDebugUtilsMess
     createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | 
         VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | 
         VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
-    createInfo.pfnUserCallback = debugCallback;
+    createInfo.pfnUserCallback = debugCallback; // Debug callback function
 }
 
 void HelloTriangleApplication::setupDebugMessenger()
