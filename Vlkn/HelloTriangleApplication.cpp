@@ -50,12 +50,12 @@ void HelloTriangleApplication::mainLoop()
         drawFrame();
     }
 
+    // Wait for the logical device to finish operations before exiting
     vkDeviceWaitIdle(device);
 }
 
 void HelloTriangleApplication::cleanup()
 {
-
     vkDestroySemaphore(device, renderFinishedSemaphores, nullptr);
     vkDestroySemaphore(device, imageAvailableSemaphores, nullptr);
     vkDestroyFence(device, inFlightFence, nullptr);
@@ -564,6 +564,7 @@ void HelloTriangleApplication::drawFrame()
     vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
     vkResetFences(device, 1, &inFlightFence);
     uint32_t imageIndex;
+    // Acquiring an image from the swap chain
     vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphores, VK_NULL_HANDLE, &imageIndex);
     vkResetCommandBuffer(commandBuffer, /*VkCommandBufferResetFlagBits*/ 0);
     recordCommandBuffer(commandBuffer, imageIndex);
