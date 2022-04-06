@@ -37,7 +37,7 @@ private:
 
     VkInstance instance;
     VkDebugUtilsMessengerEXT debugMessenger;
-    VkSurfaceKHR surface;
+    VkSurfaceKHR surface; // Interface to the window system
 
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE; // Physical device
     VkDevice device; // Logical device
