@@ -42,7 +42,7 @@ private:
     VkPhysicalDevice physicalDevice = VK_NULL_HANDLE; // Physical device
     VkDevice device; // Logical device
 
-    VkQueue graphicsQueue;
+    VkQueue graphicsQueue; // Obtained through vkGetDeviceQueue()
     VkQueue presentQueue;
 
     // Swap chain
