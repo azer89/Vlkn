@@ -6,6 +6,7 @@
 
 #include <vector>
 
+// Is used when calling vkGetPhysicalDeviceSurfaceCapabilitiesKHR
 struct SwapChainSupportDetails 
 {
     VkSurfaceCapabilitiesKHR capabilities;

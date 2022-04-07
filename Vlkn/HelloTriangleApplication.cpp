@@ -663,7 +663,9 @@ bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
         SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device);
         swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
     }
-    return indices.isComplete() && extensionsSupported && swapChainAdequate;
+    return indices.isComplete() && 
+        extensionsSupported && 
+        swapChainAdequate; // Check if the device supports swap chain
 }
 
 /*
