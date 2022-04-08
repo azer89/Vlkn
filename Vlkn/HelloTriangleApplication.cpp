@@ -239,6 +239,7 @@ VkSurfaceFormatKHR HelloTriangleApplication::chooseSwapSurfaceFormat(const std::
     return availableFormats[0];
 }
 
+// Presentation mode
 VkPresentModeKHR HelloTriangleApplication::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
 {
     for (const auto& availablePresentMode : availablePresentModes) 
@@ -276,18 +277,18 @@ SwapChainSupportDetails HelloTriangleApplication::querySwapChainSupport(VkPhysic
 {
     SwapChainSupportDetails details;
     vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
+
     uint32_t formatCount;
     vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
-
     if (formatCount != 0) 
     {
         details.formats.resize(formatCount);
+        // To query the supported swapchain format-color space pairs for a surface
         vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
     }
 
     uint32_t presentModeCount;
     vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
-
     if (presentModeCount != 0) 
     {
         details.presentModes.resize(presentModeCount);
@@ -338,6 +339,7 @@ void HelloTriangleApplication::createImageViews()
 
 void HelloTriangleApplication::createGraphicsPipeline()
 {
+    // SPIR-V bytecode
     // TODO: change to relative paths
     auto vertShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/vert.spv");
     auto fragShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/frag.spv");
