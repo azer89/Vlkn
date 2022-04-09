@@ -8,6 +8,10 @@ namespace VlknFileIO
 {
     static std::vector<char> readFile(const std::string& filename)
     {
+        /*
+        ate: Start reading at the end of the file
+        binary: Read the file as binary file 
+        */
         std::ifstream file(filename, std::ios::ate | std::ios::binary);
         if (!file.is_open())
         {

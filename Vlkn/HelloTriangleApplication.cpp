@@ -451,7 +451,7 @@ void HelloTriangleApplication::createGraphicsPipeline()
         throw std::runtime_error("[ERROR] Failed to create graphics pipeline.");
     }
 
-    // Destroy?
+    // Destroy shader module 
     vkDestroyShaderModule(device, fragShaderModule, nullptr);
     vkDestroyShaderModule(device, vertShaderModule, nullptr);
 }
