@@ -69,6 +69,8 @@ private:
     std::vector<VkFence> inFlightFences;
     uint32_t currentFrame = 0;
 
+    bool framebufferResized = false;
+
 public:
     void run();
 
@@ -76,8 +78,11 @@ private:
     void initWindow();
     void initVulkan();
     void mainLoop();
-    void cleanup(); // After the window is closed 
     void createInstance();
+    void cleanup(); // After the window is closed 
+
+    void cleanupSwapChain();
+    void recreateSwapChain();
 
     // Physical devices
     // Select a graphics card
@@ -131,6 +136,10 @@ private:
         VkDebugUtilsMessageTypeFlagsEXT messageType, 
         const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, 
         void* pUserData);
+
+private:
+    static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
+
 };
 
 #endif
