@@ -29,7 +29,8 @@ void HelloTriangleApplication::initWindow()
 
 void HelloTriangleApplication::framebufferResizeCallback(GLFWwindow* window, int width, int height)
 {
-    auto app = reinterpret_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
+    // Originally reinterpret_cast
+    auto app = static_cast<HelloTriangleApplication*>(glfwGetWindowUserPointer(window));
     app->framebufferResized = true;
 }
 
