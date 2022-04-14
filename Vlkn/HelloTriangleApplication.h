@@ -1,7 +1,10 @@
 #ifndef __HELLO_TRIANGLE_APPLICATION_H__
 #define __HELLO_TRIANGLE_APPLICATION_H__
 
+#ifndef GLFW_INCLUDE_VULKAN
 #define GLFW_INCLUDE_VULKAN
+#endif
+
 #include <GLFW/glfw3.h>
 
 #include <vector>

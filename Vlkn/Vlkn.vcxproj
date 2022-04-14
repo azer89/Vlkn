@@ -163,6 +163,7 @@
     <ClInclude Include="HelloTriangleApplication.h" />
     <ClInclude Include="QueueFamilyIndices.h" />
     <ClInclude Include="SwapChainSupportDetails.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Shaders\compile.bat" />
