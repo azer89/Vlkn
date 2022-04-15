@@ -9,6 +9,7 @@
 
 #include <vector>
 
+#include "Vertex.h"
 #include "QueueFamilyIndices.h"
 #include "SwapChainSupportDetails.h"
 
@@ -32,6 +33,13 @@ const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
+
+const std::vector<Vertex> vertices = 
+{
+    {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+    {{0.5f, 0.5f}, {0.0f, 1.0f, 0.0f}},
+    {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}
+};
 
 class HelloTriangleApplication
 {
@@ -64,6 +72,10 @@ private:
     // Command
     VkCommandPool commandPool;
     std::vector<VkCommandBuffer> commandBuffers;
+
+    // Vertex buffer
+    VkBuffer vertexBuffer;
+    VkDeviceMemory vertexBufferMemory;
 
     // Are used to add order between queue operations
     std::vector<VkSemaphore> imageAvailableSemaphores;
@@ -119,6 +131,10 @@ private:
     void createCommandPool();
     void createCommandBuffers();
     void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
+
+    // Vertex buffer
+    void createVertexBuffer();
+    uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
     void createSyncObjects();
     void drawFrame();
