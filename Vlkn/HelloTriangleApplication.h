@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "Vertex.h"
+#include "UniformBufferObject.h"
 #include "QueueFamilyIndices.h"
 #include "SwapChainSupportDetails.h"
 
