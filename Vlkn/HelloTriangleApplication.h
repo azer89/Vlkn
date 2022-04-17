@@ -73,6 +73,7 @@ private:
 
     // Pipeline
     VkRenderPass renderPass;
+    VkDescriptorSetLayout descriptorSetLayout;
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
 
@@ -87,6 +88,10 @@ private:
     // Index buffer
     VkBuffer indexBuffer;
     VkDeviceMemory indexBufferMemory;
+
+    // Uniform buffer
+    std::vector<VkBuffer> uniformBuffers;
+    std::vector<VkDeviceMemory> uniformBuffersMemory;
 
     // Are used to add order between queue operations
     std::vector<VkSemaphore> imageAvailableSemaphores;
@@ -153,7 +158,13 @@ private:
     void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
     uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 
+    // Index buffer
     void createIndexBuffer();
+
+    // Uniform buffer
+    void createDescriptorSetLayout();
+    void createUniformBuffers();
+    void updateUniformBuffer(uint32_t currentImage);
 
     void createSyncObjects();
     void drawFrame();
