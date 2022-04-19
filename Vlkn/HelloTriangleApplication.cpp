@@ -486,7 +486,7 @@ void HelloTriangleApplication::createGraphicsPipeline()
 
     if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) 
     {
-        throw std::runtime_error("[ERROR] Failed to create pipeline layout!");
+        throw std::runtime_error("[ERROR] Failed to create pipeline layout.");
     }
 
     VkGraphicsPipelineCreateInfo pipelineInfo{};
@@ -506,7 +506,7 @@ void HelloTriangleApplication::createGraphicsPipeline()
 
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) 
     {
-        throw std::runtime_error("[ERROR] Failed to create graphics pipeline!");
+        throw std::runtime_error("[ERROR] Failed to create graphics pipeline.");
     }
 
     vkDestroyShaderModule(device, fragShaderModule, nullptr);
@@ -529,7 +529,7 @@ void HelloTriangleApplication::createFramebuffers()
         framebufferInfo.layers = 1;
         if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS)
         {
-            throw std::runtime_error("[ERROR] Failed to create frame buffer!");
+            throw std::runtime_error("[ERROR] Failed to create frame buffer.");
         }
     }
 }
@@ -652,7 +652,7 @@ void HelloTriangleApplication::createDescriptorPool()
     poolInfo.maxSets = static_cast<uint32_t>(MAX_FRAMES_IN_FLIGHT);
     if (vkCreateDescriptorPool(device, &poolInfo, nullptr, &descriptorPool) != VK_SUCCESS) 
     {
-        throw std::runtime_error("failed to create descriptor pool!");
+        throw std::runtime_error("failed to create descriptor pool.");
     }
 }
 
@@ -667,7 +667,7 @@ void HelloTriangleApplication::createDescriptorSets()
     descriptorSets.resize(MAX_FRAMES_IN_FLIGHT);
     if (vkAllocateDescriptorSets(device, &allocInfo, descriptorSets.data()) != VK_SUCCESS) 
     {
-        throw std::runtime_error("[ERROR] Failed to allocate descriptor sets!");
+        throw std::runtime_error("[ERROR] Failed to allocate descriptor sets.");
     }
     for (size_t i = 0; i < MAX_FRAMES_IN_FLIGHT; i++) 
     {
@@ -814,7 +814,6 @@ void HelloTriangleApplication::drawFrame()
 
     uint32_t imageIndex;
     VkResult result = vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
-
     if (result == VK_ERROR_OUT_OF_DATE_KHR) 
     {
         recreateSwapChain();
@@ -826,24 +825,19 @@ void HelloTriangleApplication::drawFrame()
     }
 
     updateUniformBuffer(currentFrame);
-
     vkResetFences(device, 1, &inFlightFences[currentFrame]);
-
     vkResetCommandBuffer(commandBuffers[currentFrame], /*VkCommandBufferResetFlagBits*/ 0);
     recordCommandBuffer(commandBuffers[currentFrame], imageIndex);
 
     VkSubmitInfo submitInfo{};
     submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-
     VkSemaphore waitSemaphores[] = { imageAvailableSemaphores[currentFrame] };
     VkPipelineStageFlags waitStages[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
     submitInfo.waitSemaphoreCount = 1;
     submitInfo.pWaitSemaphores = waitSemaphores;
     submitInfo.pWaitDstStageMask = waitStages;
-
     submitInfo.commandBufferCount = 1;
     submitInfo.pCommandBuffers = &commandBuffers[currentFrame];
-
     VkSemaphore signalSemaphores[] = { renderFinishedSemaphores[currentFrame] };
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
@@ -855,18 +849,14 @@ void HelloTriangleApplication::drawFrame()
 
     VkPresentInfoKHR presentInfo{};
     presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
-
     presentInfo.waitSemaphoreCount = 1;
     presentInfo.pWaitSemaphores = signalSemaphores;
-
     VkSwapchainKHR swapChains[] = { swapChain };
     presentInfo.swapchainCount = 1;
     presentInfo.pSwapchains = swapChains;
-
     presentInfo.pImageIndices = &imageIndex;
 
     result = vkQueuePresentKHR(presentQueue, &presentInfo);
-
     if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || framebufferResized) 
     {
         framebufferResized = false;
@@ -938,7 +928,7 @@ void HelloTriangleApplication::createDescriptorSetLayout()
     layoutInfo.pBindings = &uboLayoutBinding;
     if (vkCreateDescriptorSetLayout(device, &layoutInfo, nullptr, &descriptorSetLayout) != VK_SUCCESS) 
     {
-        throw std::runtime_error("[ERROR] Failed to create descriptor set layout!");
+        throw std::runtime_error("[ERROR] Failed to create descriptor set layout.");
     }
 }
 
