@@ -162,6 +162,7 @@
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="HelloTriangleApplication.h" />
     <ClInclude Include="QueueFamilyIndices.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwapChainSupportDetails.h" />
     <ClInclude Include="UniformBufferObject.h" />
     <ClInclude Include="Vertex.h" />
