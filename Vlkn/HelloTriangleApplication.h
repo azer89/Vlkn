@@ -35,17 +35,21 @@ const uint32_t HEIGHT = 600;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-const std::vector<Vertex> vertices = 
-{
-    {{-0.5f, -0.5f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}},
-    {{0.5f, -0.5f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}},
-    {{0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}},
-    {{-0.5f, 0.5f}, {1.0f, 1.0f, 1.0f}, {1.0f, 1.0f}}
+const std::vector<Vertex> vertices = {
+    {{-0.5f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}}, // 0
+    {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}}, // 1
+    {{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}}, // 2
+    {{-0.5f, 0.5f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1.0f, 1.0f}}, // 3
+
+    {{-1.5f, -1.5f, -2.5f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}}, // 4
+    {{1.5f, -1.5f, -2.5f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}}, // 5
+    {{1.5f, 1.5f, -2.5f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}}, // 6
+    {{-1.5f, 1.5f, -2.5f}, {1.0f, 1.0f, 1.0f}, {1.0f, 1.0f}} // 7
 };
 
-const std::vector<uint16_t> indices = 
-{
-    0, 1, 2, 2, 3, 0
+const std::vector<uint16_t> indices = {
+    0, 1, 2, 2, 3, 0,
+    4, 5, 6, 6, 7, 4
 };
 
 class HelloTriangleApplication
@@ -111,6 +115,11 @@ private:
     VkImageView textureImageView;
     VkSampler textureSampler;
 
+    // Depth testing
+    VkImage depthImage;
+    VkDeviceMemory depthImageMemory;
+    VkImageView depthImageView;
+
 public:
     void run();
 
@@ -164,7 +173,7 @@ private:
     void copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height);
     void createTextureImageView();
     void createTextureSampler();
-    VkImageView createImageView(VkImage image, VkFormat format);
+    VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags);
 
     // Vertex buffer
     void createVertexBuffer();
@@ -191,6 +200,12 @@ private:
 
     void createSyncObjects();
     void drawFrame();
+
+    // Depth stencil
+    void createDepthResources();
+    VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features);
+    VkFormat findDepthFormat();
+    bool hasStencilComponent(VkFormat format);
 
     // Validation layer
     void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
