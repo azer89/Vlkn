@@ -8,7 +8,7 @@
 #include <chrono>
 
 #define GLM_FORCE_RADIANS // Enforce all the angles to be radians
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE // To change default near and far clip planes definition
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE // Configure depth to use the Vulkan range of 0.0 to 1.0
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
