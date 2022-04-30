@@ -78,7 +78,7 @@ void HelloTriangleApplication::mainLoop()
         drawFrame();
     }
     // Wait for the logical device to finish operations before exiting
-    vkDeviceWaitIdle(device);
+    VkResult result = vkDeviceWaitIdle(device);
 }
 
 void HelloTriangleApplication::recreateSwapChain()
