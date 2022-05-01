@@ -10,8 +10,8 @@
 #include <vector>
 
 #include "Vertex.h"
-#include "UniformBufferObject.h"
 #include "QueueFamilyIndices.h"
+#include "UniformBufferObject.h"
 #include "SwapChainSupportDetails.h"
 
 const std::vector<const char*> validationLayers =
@@ -67,7 +67,7 @@ private:
     VkQueue graphicsQueue; // Obtained through vkGetDeviceQueue()
     VkQueue presentQueue;
 
-    // Swap chain,  a queue of images that are waiting to be presented to the screen
+    // Swap chain, a queue of images waiting to be presented to the screen
     VkSwapchainKHR swapChain;
     std::vector<VkImage> swapChainImages;
     VkFormat swapChainImageFormat;
@@ -115,7 +115,7 @@ private:
     VkImageView textureImageView;
     VkSampler textureSampler;
 
-    // Depth testing
+    // Depth buffer
     VkImage depthImage;
     VkDeviceMemory depthImageMemory;
     VkImageView depthImageView;
