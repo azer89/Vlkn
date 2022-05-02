@@ -1036,7 +1036,9 @@ void HelloTriangleApplication::createIndexBuffer()
         stagingBuffer,
         stagingBufferMemory);
     void* data;
+    // To retrieve a host virtual address pointer to a region of a mappable memory object
     vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
+    // Copy indices
     memcpy(data, indices.data(), (size_t)bufferSize);
     vkUnmapMemory(device, stagingBufferMemory);
     createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, indexBuffer, indexBufferMemory);

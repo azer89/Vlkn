@@ -197,7 +197,8 @@ private:
 
     void createDescriptorPool();
     void createDescriptorSets();
-
+    
+    // Creating semaphores and fences
     void createSyncObjects();
     void drawFrame();
 
@@ -232,4 +233,4 @@ private:
         void* pUserData);
 };
 
-#endif
+#endif 
