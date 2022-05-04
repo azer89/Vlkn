@@ -572,8 +572,8 @@ void HelloTriangleApplication::createFramebuffers()
     {
         std::array<VkImageView, 2> attachments = 
         {
-            swapChainImageViews[i],
-            depthImageView
+            swapChainImageViews[i], // handles for swap chain images
+            depthImageView // a handle for depth image
         };
         VkFramebufferCreateInfo framebufferInfo{};
         framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
