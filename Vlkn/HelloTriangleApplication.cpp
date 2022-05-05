@@ -306,6 +306,8 @@ VkPresentModeKHR HelloTriangleApplication::chooseSwapPresentMode(const std::vect
 {
     for (const auto& availablePresentMode : availablePresentModes)
     {
+        // Instead of blocking the application when the queue is full, 
+        // the images that are already queued are simply replaced with the newer ones
         if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR)
         {
             return availablePresentMode;
