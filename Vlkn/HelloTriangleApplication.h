@@ -65,7 +65,7 @@ private:
     VkDevice device; // Logical device
 
     VkQueue graphicsQueue; // Obtained through vkGetDeviceQueue()
-    VkQueue presentQueue;
+    VkQueue presentQueue; // Presentation queue
 
     // Swap chain, a queue of images waiting to be presented to the screen
     VkSwapchainKHR swapChain;
@@ -82,7 +82,7 @@ private:
     VkPipeline graphicsPipeline;
 
     // Command
-    VkCommandPool commandPool;
+    VkCommandPool commandPool; // To allocate commandBuffers
     std::vector<VkCommandBuffer> commandBuffers;
 
     // Vertex buffer

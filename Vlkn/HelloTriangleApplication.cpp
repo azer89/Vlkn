@@ -243,7 +243,8 @@ void HelloTriangleApplication::createSwapChain()
     VkExtent2D extent = chooseSwapExtent(swapChainSupport.capabilities);
     uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
 
-    if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount)
+    if (swapChainSupport.capabilities.maxImageCount > 0 && 
+        imageCount > swapChainSupport.capabilities.maxImageCount)
     {
         imageCount = swapChainSupport.capabilities.maxImageCount;
     }
@@ -293,7 +294,8 @@ VkSurfaceFormatKHR HelloTriangleApplication::chooseSwapSurfaceFormat(const std::
 {
     for (const auto& availableFormat : availableFormats)
     {
-        if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+        if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && 
+            availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
         {
             return availableFormat;
         }
@@ -379,7 +381,7 @@ bool HelloTriangleApplication::checkDeviceExtensionSupport(VkPhysicalDevice devi
 void HelloTriangleApplication::createImageViews()
 {
     swapChainImageViews.resize(swapChainImages.size());
-    for (uint32_t i = 0; i < swapChainImages.size(); ++i) 
+    for (size_t i = 0; i < swapChainImages.size(); ++i) 
     {
         swapChainImageViews[i] = createImageView(swapChainImages[i], swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT);
     }
@@ -434,8 +436,8 @@ VkImageView HelloTriangleApplication::createImageView(VkImage image, VkFormat fo
 }
 
 /*
-auto vertShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/vert.spv");
-auto fragShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/frag.spv");
+C:/Users/azer/workspace/Vlkn/Shaders/vert.spv
+C:/Users/azer/workspace/Vlkn/Shaders/frag.spv
 */
 void HelloTriangleApplication::createGraphicsPipeline() 
 {
