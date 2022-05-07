@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib> // EXIT_SUCCESS and EXIT_FAILURE macros
 
 #include "HelloTriangleApplication.h"
 
