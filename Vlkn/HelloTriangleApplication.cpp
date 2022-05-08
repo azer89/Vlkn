@@ -1,10 +1,11 @@
-#include <iostream>
-#include <stdexcept>
+#include <iostream> // std::cerr
 #include <set>
-#include <algorithm>
-#include <cstdint>
-#include <limits>
-#include <chrono>
+#include <algorithm> // clamp
+#include <chrono> // for rotating the rectangles
+
+//#include <stdexcept> 
+//#include <cstdint>
+//#include <limits>
 
 #define GLM_FORCE_RADIANS // Enforce all the angles to be radians
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE // Configure depth to use the Vulkan range of 0.0 to 1.0
