@@ -87,7 +87,7 @@ void HelloTriangleApplication::recreateSwapChain()
     int width = 0;
     int height = 0;
     glfwGetFramebufferSize(window, &width, &height);
-    while (width == 0 || height == 0)
+    while (width == 0 || height == 0) // window minimization case
     {
         glfwGetFramebufferSize(window, &width, &height);
         glfwWaitEvents();
