@@ -73,7 +73,7 @@ private:
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
     std::vector<VkImageView> swapChainImageViews;
-    std::vector<VkFramebuffer> swapChainFramebuffers;
+    std::vector<VkFramebuffer> swapChainFramebuffers; // A frame buffer for each swap chain image
 
     // Pipeline
     VkRenderPass renderPass;
