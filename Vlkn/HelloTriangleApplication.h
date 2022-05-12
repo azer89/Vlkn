@@ -82,8 +82,15 @@ private:
     VkPipeline graphicsPipeline;
 
     // Command
-    VkCommandPool commandPool; // To allocate commandBuffers
-    std::vector<VkCommandBuffer> commandBuffers;
+    /*
+    Command pools are objects that command buffer memory is allocated from
+    */
+    VkCommandPool commandPool;
+    /*
+    Command buffers are objects used to record commands which 
+    can be subsequently submitted to a device queue for execution
+    */
+    std::vector<VkCommandBuffer> commandBuffers; 
 
     // Vertex buffer
     VkBuffer vertexBuffer;
