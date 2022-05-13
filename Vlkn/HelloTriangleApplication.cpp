@@ -964,9 +964,10 @@ void HelloTriangleApplication::createDescriptorSets()
 }
 
 void HelloTriangleApplication::createBuffer(VkDeviceSize size,
-    VkBufferUsageFlags
-    usage, VkMemoryPropertyFlags properties,
-    VkBuffer& buffer, VkDeviceMemory& bufferMemory)
+    VkBufferUsageFlags usage, 
+    VkMemoryPropertyFlags properties,
+    VkBuffer& buffer, 
+    VkDeviceMemory& bufferMemory)
 {
     VkBufferCreateInfo bufferInfo{};
     bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
