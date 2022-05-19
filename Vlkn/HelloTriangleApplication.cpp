@@ -18,6 +18,7 @@
 
 #include "HelloTriangleApplication.h"
 #include "FileIO.h"
+#include "OBJLoader.h"
 
 void HelloTriangleApplication::run()
 {
@@ -62,6 +63,7 @@ void HelloTriangleApplication::initVulkan()
     createTextureImage();
     createTextureImageView();
     createTextureSampler();
+    loadModel();
     createVertexBuffer();
     createIndexBuffer();
     createUniformBuffers();
@@ -442,8 +444,8 @@ C:/Users/azer/workspace/Vlkn/Shaders/frag.spv
 */
 void HelloTriangleApplication::createGraphicsPipeline() 
 {
-    auto vertShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/vert.spv");
-    auto fragShaderCode = VlknFileIO::readFile("C:/Users/azer/workspace/Vlkn/Shaders/frag.spv");
+    auto vertShaderCode = VlknFileIO::readFile(VERTEX_SHADER_PATH);
+    auto fragShaderCode = VlknFileIO::readFile(FRAGMENT_SHADER_PATH);
 
     VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
     VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
@@ -717,7 +719,7 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
     VkBuffer vertexBuffers[] = { vertexBuffer };
     VkDeviceSize offsets[] = { 0 };
     vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
-    vkCmdBindIndexBuffer(commandBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT16);
+    vkCmdBindIndexBuffer(commandBuffer, indexBuffer, 0, VK_INDEX_TYPE_UINT32);
     vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 0, 1, &descriptorSets[currentFrame], 0, nullptr);
     vkCmdDrawIndexed(commandBuffer, static_cast<uint32_t>(indices.size()), 1, 0, 0, 0);
     vkCmdEndRenderPass(commandBuffer);
@@ -730,8 +732,10 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 
 void HelloTriangleApplication::createTextureImage()
 {
-    int texWidth, texHeight, texChannels;
-    stbi_uc* pixels = stbi_load("C:/Users/azer/workspace/Vlkn/Textures/texture.jpg", 
+    int texWidth;
+    int texHeight;
+    int texChannels;
+    stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(),
         &texWidth, 
         &texHeight, 
         &texChannels, 
@@ -1412,6 +1416,11 @@ void HelloTriangleApplication::setupDebugMessenger()
     {
         throw std::runtime_error("[ERROR] Failed to set up debug messenger.");
     }
+}
+
+void HelloTriangleApplication::loadModel()
+{
+    OBJLoader::loadModel(MODEL_PATH, vertices, indices);
 }
 
 std::vector<const char*> HelloTriangleApplication::getRequiredExtensions()

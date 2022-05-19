@@ -33,9 +33,15 @@ const bool enableValidationLayers = true;
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
 
+const std::string MODEL_PATH = "C:/Users/azer/workspace/Vlkn/Models/viking_room.obj";
+const std::string TEXTURE_PATH = "C:/Users/azer/workspace/Vlkn/Textures/viking_room.png";
+
+const std::string VERTEX_SHADER_PATH = "C:/Users/azer/workspace/Vlkn/Shaders/vert.spv";
+const std::string FRAGMENT_SHADER_PATH = "C:/Users/azer/workspace/Vlkn/Shaders/frag.spv";
+
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-const std::vector<Vertex> vertices = {
+/*const std::vector<Vertex> vertices = {
     {{-0.5f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}, {1.0f, 0.0f}}, // 0
     {{0.5f, -0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}}, // 1
     {{0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}, {0.0f, 1.0f}}, // 2
@@ -50,7 +56,7 @@ const std::vector<Vertex> vertices = {
 const std::vector<uint16_t> indices = {
     0, 1, 2, 2, 3, 0,
     4, 5, 6, 6, 7, 4
-};
+};*/
 
 class HelloTriangleApplication
 {
@@ -91,6 +97,9 @@ private:
     can be subsequently submitted to a device queue for execution
     */
     std::vector<VkCommandBuffer> commandBuffers; 
+
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
 
     // Vertex buffer
     VkBuffer vertexBuffer;
@@ -181,6 +190,9 @@ private:
     void createTextureImageView();
     void createTextureSampler();
     VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags);
+
+    // 3D model
+    void loadModel();
 
     // Vertex buffer
     void createVertexBuffer();

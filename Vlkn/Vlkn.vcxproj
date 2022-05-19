@@ -157,10 +157,12 @@
   <ItemGroup>
     <ClCompile Include="HelloTriangleApplication.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="HelloTriangleApplication.h" />
+    <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="QueueFamilyIndices.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwapChainSupportDetails.h" />

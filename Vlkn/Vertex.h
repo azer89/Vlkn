@@ -5,16 +5,24 @@
 #define GLFW_INCLUDE_VULKAN
 #endif 
 
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#define GLM_ENABLE_EXPERIMENTAL
+#endif 
+
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtx/hash.hpp>
+
 #include <array>
 
-struct Vertex {
+struct Vertex 
+{
     glm::vec3 pos;
     glm::vec3 color;
     glm::vec2 texCoord;
 
-    static VkVertexInputBindingDescription getBindingDescription() {
+    static VkVertexInputBindingDescription getBindingDescription() 
+    {
         VkVertexInputBindingDescription bindingDescription{};
         bindingDescription.binding = 0;
         bindingDescription.stride = sizeof(Vertex);
@@ -23,7 +31,8 @@ struct Vertex {
         return bindingDescription;
     }
 
-    static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() {
+    static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() 
+    {
         std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
 
         attributeDescriptions[0].binding = 0;
@@ -43,6 +52,27 @@ struct Vertex {
 
         return attributeDescriptions;
     }
+
+    bool operator==(const Vertex& other) const 
+    {
+        // TODO Use epsilon
+        return pos == other.pos && 
+            color == other.color && 
+            texCoord == other.texCoord;
+    }
 };
+
+namespace std
+{
+    template<> struct hash<Vertex>
+    {
+        size_t operator()(Vertex const& vertex) const
+        {
+            return ((hash<glm::vec3>()(vertex.pos) ^
+                (hash<glm::vec3>()(vertex.color) << 1)) >> 1) ^
+                (hash<glm::vec2>()(vertex.texCoord) << 1);
+        }
+    };
+}
 
 #endif
