@@ -13,12 +13,13 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
 #include "HelloTriangleApplication.h"
 #include "FileIO.h"
 #include "OBJLoader.h"
+#include "ImageLoader.h"
 
 void HelloTriangleApplication::run()
 {
@@ -732,20 +733,27 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 
 void HelloTriangleApplication::createTextureImage()
 {
-    int texWidth;
-    int texHeight;
-    int texChannels;
-    stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(),
+    int texWidth = 0;
+    int texHeight = 0;
+    int texChannels = 0;
+    /*stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(),
         &texWidth, 
         &texHeight, 
         &texChannels, 
-        STBI_rgb_alpha);
-    VkDeviceSize imageSize = texWidth * texHeight * 4;
-
-    if (!pixels) 
+        STBI_rgb_alpha);*/
+    unsigned char* pixels = nullptr;
+    ImageLoader imgLoader;
+    if (!imgLoader.GetPixels(TEXTURE_PATH.c_str(), texWidth, texHeight, texChannels, pixels))
     {
         throw std::runtime_error("[ERROR] Failed to load texture image.");
     }
+
+    VkDeviceSize imageSize = texWidth * texHeight * 4;
+    
+    /*if (!pixels)
+    {
+        throw std::runtime_error("[ERROR] Failed to load texture image.");
+    }*/
 
     VkBuffer stagingBuffer;
     VkDeviceMemory stagingBufferMemory;
@@ -760,7 +768,8 @@ void HelloTriangleApplication::createTextureImage()
     memcpy(data, pixels, static_cast<size_t>(imageSize));
     vkUnmapMemory(device, stagingBufferMemory);
 
-    stbi_image_free(pixels);
+    //stbi_image_free(pixels);
+    imgLoader.DestroyPixels();
 
     createImage(texWidth, texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory);
 
