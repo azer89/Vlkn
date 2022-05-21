@@ -733,22 +733,23 @@ void HelloTriangleApplication::recordCommandBuffer(VkCommandBuffer commandBuffer
 
 void HelloTriangleApplication::createTextureImage()
 {
-    int texWidth = 0;
-    int texHeight = 0;
-    int texChannels = 0;
+    //int texWidth = 0;
+    //int texHeight = 0;
+    //int texChannels = 0;
     /*stbi_uc* pixels = stbi_load(TEXTURE_PATH.c_str(),
         &texWidth, 
         &texHeight, 
         &texChannels, 
         STBI_rgb_alpha);*/
-    unsigned char* pixels = nullptr;
+    //unsigned char* pixels = nullptr;
     ImageLoader imgLoader;
-    if (!imgLoader.GetPixels(TEXTURE_PATH.c_str(), texWidth, texHeight, texChannels, pixels))
+    //if (!imgLoader.GetPixels(TEXTURE_PATH.c_str(), texWidth, texHeight, texChannels, pixels))
+    if (!imgLoader.LoadImage(TEXTURE_PATH.c_str()))
     {
         throw std::runtime_error("[ERROR] Failed to load texture image.");
     }
 
-    VkDeviceSize imageSize = texWidth * texHeight * 4;
+    VkDeviceSize imageSize = imgLoader.texWidth * imgLoader.texHeight * 4;
     
     /*if (!pixels)
     {
@@ -765,16 +766,16 @@ void HelloTriangleApplication::createTextureImage()
 
     void* data;
     vkMapMemory(device, stagingBufferMemory, 0, imageSize, 0, &data);
-    memcpy(data, pixels, static_cast<size_t>(imageSize));
+    memcpy(data, imgLoader.pixels, static_cast<size_t>(imageSize));
     vkUnmapMemory(device, stagingBufferMemory);
 
     //stbi_image_free(pixels);
-    imgLoader.DestroyPixels();
+    imgLoader.DestroyImage();
 
-    createImage(texWidth, texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory);
+    createImage(imgLoader.texWidth, imgLoader.texHeight, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_TILING_OPTIMAL, VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, textureImage, textureImageMemory);
 
     transitionImageLayout(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-    copyBufferToImage(stagingBuffer, textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
+    copyBufferToImage(stagingBuffer, textureImage, static_cast<uint32_t>(imgLoader.texWidth), static_cast<uint32_t>(imgLoader.texHeight));
     transitionImageLayout(textureImage, VK_FORMAT_R8G8B8A8_SRGB, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
     vkDestroyBuffer(device, stagingBuffer, nullptr);

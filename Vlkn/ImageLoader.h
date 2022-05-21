@@ -3,12 +3,16 @@
 
 struct ImageLoader
 {
-private:
+public:
 	unsigned char* pixels;
+	int texWidth = 0;
+	int texHeight = 0;
+	int texChannels = 0;
 
 public:
-	bool GetPixels(const char* filename, int& texWidth, int& texHeight, int& texChannels, unsigned char*& pixels);
-	void DestroyPixels();
+	bool LoadImage(const char* filename);
+	//bool GetPixels(const char* filename, int& texWidth, int& texHeight, int& texChannels, unsigned char*& pixels);
+	void DestroyImage();
 };
 
 #endif
