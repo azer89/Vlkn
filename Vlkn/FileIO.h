@@ -6,7 +6,7 @@
 
 namespace VlknFileIO
 {
-    static std::vector<char> readFile(const std::string& filename)
+    static std::vector<char> ReadFile(const std::string& filename)
     {
         /*
         ate: Start reading at the end of the file

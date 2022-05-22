@@ -9,7 +9,7 @@ struct QueueFamilyIndices
     std::optional<uint32_t> graphicsFamily; // support drawing command?
     std::optional<uint32_t> presentFamily; // support image presentation?
 
-    bool isComplete() 
+    bool IsComplete() 
     {
         return graphicsFamily.has_value() && presentFamily.has_value();
     }

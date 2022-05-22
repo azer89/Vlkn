@@ -3,7 +3,7 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include "tiny_obj_loader.h"
 
-void OBJLoader::loadModel(const std::string& file_path, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
+void OBJLoader::LoadModel(const std::string& file_path, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices)
 {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;

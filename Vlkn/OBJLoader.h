@@ -8,7 +8,7 @@
 struct OBJLoader
 {
 public:
-	static void loadModel(const std::string & file_path, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
+	static void LoadModel(const std::string & file_path, std::vector<Vertex>& vertices, std::vector<uint32_t>& indices);
 };
 
 #endif

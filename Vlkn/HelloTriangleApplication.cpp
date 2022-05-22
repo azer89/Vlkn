@@ -445,8 +445,8 @@ C:/Users/azer/workspace/Vlkn/Shaders/frag.spv
 */
 void HelloTriangleApplication::createGraphicsPipeline() 
 {
-    auto vertShaderCode = VlknFileIO::readFile(VERTEX_SHADER_PATH);
-    auto fragShaderCode = VlknFileIO::readFile(FRAGMENT_SHADER_PATH);
+    auto vertShaderCode = VlknFileIO::ReadFile(VERTEX_SHADER_PATH);
+    auto fragShaderCode = VlknFileIO::ReadFile(FRAGMENT_SHADER_PATH);
 
     VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
     VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
@@ -468,8 +468,8 @@ void HelloTriangleApplication::createGraphicsPipeline()
     VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 
-    auto bindingDescription = Vertex::getBindingDescription();
-    auto attributeDescriptions = Vertex::getAttributeDescriptions();
+    auto bindingDescription = Vertex::GetBindingDescription();
+    auto attributeDescriptions = Vertex::GetAttributeDescriptions();
 
     vertexInputInfo.vertexBindingDescriptionCount = 1;
     vertexInputInfo.vertexAttributeDescriptionCount = static_cast<uint32_t>(attributeDescriptions.size());
@@ -1302,7 +1302,7 @@ bool HelloTriangleApplication::isDeviceSuitable(VkPhysicalDevice device)
     }
     VkPhysicalDeviceFeatures supportedFeatures;
     vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
-    return indices.isComplete() && 
+    return indices.IsComplete() && 
         extensionsSupported && 
         swapChainAdequate && 
         supportedFeatures.samplerAnisotropy;
@@ -1338,7 +1338,7 @@ QueueFamilyIndices HelloTriangleApplication::findQueueFamilies(VkPhysicalDevice 
             indices.presentFamily = i;
         }
 
-        if (indices.isComplete())
+        if (indices.IsComplete())
         {
             break;
         }
@@ -1430,7 +1430,7 @@ void HelloTriangleApplication::setupDebugMessenger()
 
 void HelloTriangleApplication::loadModel()
 {
-    OBJLoader::loadModel(MODEL_PATH, vertices, indices);
+    OBJLoader::LoadModel(MODEL_PATH, vertices, indices);
 }
 
 std::vector<const char*> HelloTriangleApplication::getRequiredExtensions()

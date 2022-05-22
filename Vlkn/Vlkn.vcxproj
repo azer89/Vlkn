@@ -166,7 +166,6 @@
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="QueueFamilyIndices.h" />
-    <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwapChainSupportDetails.h" />
     <ClInclude Include="UniformBufferObject.h" />
     <ClInclude Include="Vertex.h" />
