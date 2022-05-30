@@ -1110,10 +1110,10 @@ void HelloTriangleApplication::createSyncObjects()
 
 void HelloTriangleApplication::drawFrame()
 {
-    vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
+    VkResult result = vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
 
     uint32_t imageIndex;
-    VkResult result = vkAcquireNextImageKHR(device, 
+    result = vkAcquireNextImageKHR(device, 
         swapChain, 
         UINT64_MAX, 
         imageAvailableSemaphores[currentFrame], 

@@ -116,11 +116,11 @@ private:
     VkDescriptorPool descriptorPool;
     std::vector<VkDescriptorSet> descriptorSets;
 
-    // Are used to add order between queue operations
-    std::vector<VkSemaphore> imageAvailableSemaphores;
-    std::vector<VkSemaphore> renderFinishedSemaphores;
     // For ordering the execution on the CPU/host
-    std::vector<VkFence> inFlightFences;
+    std::vector<VkFence> inFlightFences; // used in drawFrame()
+    // Are used to add order between queue operations
+    std::vector<VkSemaphore> imageAvailableSemaphores; // used in drawFrame()
+    std::vector<VkSemaphore> renderFinishedSemaphores; // used in drawFrame()
     uint32_t currentFrame = 0;
 
     bool framebufferResized = false;
